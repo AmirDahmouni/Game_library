@@ -24,7 +24,7 @@ const GameGrid = ({ gameQuery }: Props) => {
           </GameCardContainer>
         ))}
         {games.map((game: Game) =>
-          <GameCardContainer key={game.id}>
+          <GameCardContainer>
             <GameCard game={game} key={game.id} />
           </GameCardContainer>
         )}
