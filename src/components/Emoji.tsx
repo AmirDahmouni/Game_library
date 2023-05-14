@@ -1,7 +1,6 @@
 import { ImageProps } from "@chakra-ui/react";
-import bullsEye from "../assets/bulls-eye.png"
-import thumbs from "../assets/thmubsUp.webp"
-import meh from "../assets/thmubsUp.webp"
+import love from "../assets/love.png";
+import like from '../assets/like.png';
 import { Image } from '@chakra-ui/react'
 
 interface Props {
@@ -12,9 +11,9 @@ const Emoji = ({ rating }: Props) => {
   if (rating < 3) return null;
 
   const emojiMap: { [key: number]: ImageProps } = {
-    3: { src: meh, alt: 'meh' },
-    4: { src: thumbs, alt: 'meh' },
-    5: { src: bullsEye, alt: 'meh' }
+    3: { src: love, alt: 'meh' },
+    4: { src: like, alt: 'meh' },
+    5: { src: love, alt: 'meh' }
   };
 
   return (<Image {...emojiMap[rating]} boxSize={25} />)
