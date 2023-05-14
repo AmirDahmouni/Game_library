@@ -23,7 +23,7 @@ const GameGrid = ({ gameQuery }: Props) => {
         ))}
         {games.map((game: Game) =>
           <GameCardContainer key={game.id}>
-            <GameCard game={game} />
+            <GameCard game={game} key={game.id} />
           </GameCardContainer>
         )}
       </SimpleGrid>
