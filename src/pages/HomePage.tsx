@@ -2,25 +2,12 @@ import { Grid, GridItem, HStack, Show, Box } from '@chakra-ui/react'
 import NavBar from "../components/NavBar"
 import GameGrid from "../components/GameGrid"
 import GenreList from "../components/GenreList"
-import { useState } from 'react'
-import { Genre } from '../Hooks/useGenres'
 import PlatformSelector from '../components/PlatformSelector'
-import { Platform } from '../Hooks/useGames'
 import SortSelector from '../components/SortSelector'
 import GameHeading from '../components/GameHeading'
 import { useDispatch, useSelector } from "react-redux";
 
-
-export interface GameQuery {
-  genre: Genre | null;
-  platform: Platform | null;
-  sortOrder: string;
-  searchText: string | null
-}
-
 function App() {
-
-  const [gameQuery, setGameQuery] = useState<GameQuery>({} as GameQuery)
 
   return (
     < Grid templateAreas={{
@@ -37,15 +24,12 @@ function App() {
       </GridItem>
       <Show above="lg">
         <GridItem area="aside" paddingX="20px" >
-          <GenreList
-            onSelectedGenre={(genre) => setGameQuery({ ...gameQuery, genre })}
-            selectedGenre={gameQuery.genre}
-          />
+          <GenreList />
         </GridItem>
       </Show>
       <GridItem area="main" >
         <Box paddingLeft={2}>
-          <GameHeading gameQuery={gameQuery} />
+          <GameHeading />
           <HStack spacing={5} paddingLeft={2} >
             <PlatformSelector />
             <SortSelector />

@@ -5,6 +5,8 @@ import { Platform } from "../Hooks/useGames"
 
 const PlatformSelector = () => {
 
+
+
   return (
     <Menu>
       <MenuButton as={Button} rightIcon={<BsChevronDown />}>{selectedPlatform?.name || "plarforms"}</MenuButton>
