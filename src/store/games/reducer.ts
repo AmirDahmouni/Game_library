@@ -1,37 +1,50 @@
 import {
-  FETCH_TODO_REQUEST,
-  FETCH_TODO_SUCCESS,
-  FETCH_TODO_FAILURE,
+  FETCH_GAMES_REQUEST,
+  FETCH_GAMES_SUCCESS,
+  FETCH_GAMES_FAILURE,
+  UPDATE_GAMES_FILTERS
 } from "./actionTypes";
 
-import { TodoActions, TodoState } from "./types";
+import { GamesActions, GamesState } from "./types";
 
-const initialState: TodoState = {
+const initialState: GamesState = {
   pending: false,
-  todos: [],
+  games: [],
+  filters: [],
   error: null,
 };
 
-export default (state = initialState, action: TodoActions) => {
+export default (state = initialState, action: GamesActions) => {
   switch (action.type) {
-    case FETCH_TODO_REQUEST:
+    case FETCH_GAMES_REQUEST:
       return {
         ...state,
         pending: true,
       };
-    case FETCH_TODO_SUCCESS:
+    case FETCH_GAMES_SUCCESS:
       return {
         ...state,
         pending: false,
-        todos: action.payload.todos,
+        games: action.payload.games,
         error: null,
       };
-    case FETCH_TODO_FAILURE:
+    case FETCH_GAMES_FAILURE:
       return {
         ...state,
         pending: false,
-        todos: [],
+        games: [],
         error: action.payload.error,
+      };
+    case UPDATE_GAMES_FILTERS:
+      return {
+        ...state,
+        filters: [
+          ...state.filters,
+          {
+            key: action.filter,
+            value: action.value
+          }
+        ],
       };
     default:
       return {

@@ -2,12 +2,14 @@ import {
   FETCH_GAMES_REQUEST,
   FETCH_GAMES_SUCCESS,
   FETCH_GAMES_FAILURE,
+  UPDATE_GAMES_FILTERS
 } from "./actionTypes";
 import IGame from "../../entities/Game";
 
-export interface GameState {
+export interface GamesState {
   pending: boolean;
   games: IGame[];
+  filters: { string: number | string }[];
   error: string | null;
 }
 
@@ -19,8 +21,16 @@ export interface FetchGamesFailurePayload {
   error: string;
 }
 
+
 export interface FetchGamesRequest {
   type: typeof FETCH_GAMES_REQUEST;
+  filters: FiltersPayload
+}
+
+export interface UpdateGamesFilters {
+  type: typeof UPDATE_GAMES_FILTERS;
+  filter: string;
+  value: string;
 }
 
 export type FetchGamesSuccess = {
@@ -33,7 +43,17 @@ export type FetchGamesFailure = {
   payload: FetchGamesFailurePayload;
 };
 
-export type TodoActions =
+export type FiltersPayload = {
+  genreId: number,
+  platformId: number,
+  sortOrder: string,
+  searchText: string,
+  pageParam: number,
+}
+
+export type GamesActions =
   | FetchGamesRequest
   | FetchGamesSuccess
-  | FetchGamesFailure;
+  | FetchGamesFailure
+  | UpdateGamesFilters
+  ;

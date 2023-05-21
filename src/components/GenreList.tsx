@@ -2,13 +2,14 @@ import useGenres from '../Hooks/useGenres'
 import { Genre } from '../Hooks/useGenres'
 import getCroppedImageUrl from '../services/image-url'
 import { ListItem, Image, HStack, List, Heading, Spinner, Button } from "@chakra-ui/react"
-
+import { useDispatch, useSelector } from "react-redux";
 interface Props {
   onSelectedGenre: (genre: Genre) => void;
   selectedGenre: Genre | null;
 }
 
 const GenreList = ({ onSelectedGenre, selectedGenre }: Props) => {
+
   const { data, isLoading, error } = useGenres()
 
   if (error) return null

@@ -8,6 +8,7 @@ import PlatformSelector from '../components/PlatformSelector'
 import { Platform } from '../Hooks/useGames'
 import SortSelector from '../components/SortSelector'
 import GameHeading from '../components/GameHeading'
+import { useDispatch, useSelector } from "react-redux";
 
 
 export interface GameQuery {
@@ -32,7 +33,7 @@ function App() {
       }}
     >
       <GridItem area="nav" >
-        <NavBar onSearch={(searchText) => setGameQuery({ ...gameQuery, searchText })} />
+        <NavBar />
       </GridItem>
       <Show above="lg">
         <GridItem area="aside" paddingX="20px" >
@@ -46,19 +47,11 @@ function App() {
         <Box paddingLeft={2}>
           <GameHeading gameQuery={gameQuery} />
           <HStack spacing={5} paddingLeft={2} >
-            <PlatformSelector
-              onSelectedPlatform={(platform) => setGameQuery({ ...gameQuery, platform })}
-              selectedPlatform={gameQuery.platform}
-            />
-            <SortSelector
-              onSelectOrder={(sortOrder) => setGameQuery({ ...gameQuery, sortOrder })}
-              sortOrder={gameQuery.sortOrder}
-            />
+            <PlatformSelector />
+            <SortSelector />
           </HStack>
         </Box>
-        <GameGrid
-          gameQuery={gameQuery}
-        />
+        <GameGrid />
       </GridItem>
     </Grid >
   )

@@ -1,15 +1,30 @@
 import { Text, SimpleGrid } from "@chakra-ui/react"
-import useGames, { Platform } from '../Hooks/useGames'
+import { useDispatch, useSelector } from "react-redux";
 import GameCard from "./GameCard";
 import GameCardSkeleton from "./GameCardSkeleton";
 import GameCardContainer from "./GameCardContainer";
-import { Game } from "../Hooks/useGames";
-import { GameQuery } from "../pages/HomePage";
-interface Props {
-  gameQuery: GameQuery
-}
-const GameGrid = ({ gameQuery }: Props) => {
-  const { data: games, error, isLoading } = useGames(gameQuery);
+import IGame from "../entities/Game";
+import {
+  getGamesSelector,
+  getErrorSelector,
+  getPendingSelector,
+  getFiltersSelector
+} from "../store/games/selectors"
+import { useEffect } from "react";
+import { fetchGamesRequest } from "../store/games/actions";
+
+const GameGrid = () => {
+
+  const dispatch = useDispatch();
+
+  const isLoading = useSelector(getPendingSelector);
+  const games = useSelector(getGamesSelector);
+  const error = useSelector(getErrorSelector);
+  const filters = useSelector(getFiltersSelector)
+
+  useEffect(() => {
+    dispatch(fetchGamesRequest(filters))
+  }, [filters])
 
   const skeletons = [1, 2, 3, 4, 5, 6];
 
@@ -23,7 +38,7 @@ const GameGrid = ({ gameQuery }: Props) => {
             <GameCardSkeleton />
           </GameCardContainer>
         ))}
-        {games.map((game: Game) =>
+        {games.map((game: IGame) =>
           <GameCardContainer>
             <GameCard game={game} key={game.id} />
           </GameCardContainer>
