@@ -1,5 +1,5 @@
 import useData from './useData';
-import { GameQuery } from '../App';
+import { GameQuery } from '../pages/HomePage';
 export interface Platform {
   id: number;
   name: string;
