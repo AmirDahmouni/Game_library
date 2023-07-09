@@ -3,14 +3,12 @@ import logo from "../assets/react.svg";
 import ColorModeSwitch from "./ColorModeSwitch";
 import SearchInput from "./SearchInput";
 import { fetchGamesRequest, updateGamesFilters } from "../store/games/actions";
-import { useDispatch, useSelector } from "react-redux";
-import { getFiltersSelector } from "../store/games/selectors";
+import { useDispatch } from "react-redux";
+import { connect } from 'react-redux';
 
-
-const NavBar = () => {
+const NavBar = ({ filters }: any) => {
 
   const dispatch = useDispatch()
-  const filters = useSelector(getFiltersSelector);
 
   const search = (text: string) => {
     dispatch(updateGamesFilters("searchText", text))
@@ -26,4 +24,10 @@ const NavBar = () => {
   )
 }
 
-export default NavBar
+const mapStateToProps = (state: any) => {
+  return {
+    filters: state.gamesState.filters
+  };
+};
+
+export default connect(mapStateToProps)(NavBar);

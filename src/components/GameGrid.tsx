@@ -1,30 +1,19 @@
+import { useEffect } from "react";
 import { Text, SimpleGrid } from "@chakra-ui/react"
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch, connect } from "react-redux";
 import GameCard from "./GameCard";
 import GameCardSkeleton from "./GameCardSkeleton";
 import GameCardContainer from "./GameCardContainer";
 import IGame from "../entities/Game";
-import {
-  getGamesSelector,
-  getErrorSelector,
-  getPendingSelector,
-  getFiltersSelector
-} from "../store/games/selectors"
-import { useEffect } from "react";
 import { fetchGamesRequest } from "../store/games/actions";
 
-const GameGrid = () => {
+const GameGrid = ({ filters, error, isLoading, games }: any) => {
 
   const dispatch = useDispatch();
 
-  const isLoading = useSelector(getPendingSelector);
-  const games = useSelector(getGamesSelector);
-  const error = useSelector(getErrorSelector);
-  const filters = useSelector(getFiltersSelector)
-
   useEffect(() => {
     dispatch(fetchGamesRequest(filters))
-  }, [filters])
+  }, [])
 
   const skeletons = [1, 2, 3, 4, 5, 6];
 
@@ -38,7 +27,8 @@ const GameGrid = () => {
             <GameCardSkeleton />
           </GameCardContainer>
         ))}
-        {games.map((game: IGame) =>
+
+        {games && games.map((game: IGame) =>
           <GameCardContainer>
             <GameCard game={game} key={game.id} />
           </GameCardContainer>
@@ -48,4 +38,13 @@ const GameGrid = () => {
   )
 }
 
-export default GameGrid
+const mapStateToProps = ({ gamesState }: any) => {
+  return {
+    filters: gamesState.filters,
+    games: gamesState.games.results,
+    isLoading: gamesState.isLoading,
+    error: gamesState.error
+  };
+};
+
+export default connect(mapStateToProps)(GameGrid);

@@ -1,16 +1,13 @@
 import { Button, Menu, MenuButton, MenuItem, MenuList } from '@chakra-ui/react'
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch, connect } from "react-redux";
 import { BsChevronDown } from 'react-icons/bs'
-import { getFiltersSelector } from '../store/games/selectors'
 import { fetchGamesRequest, updateGamesFilters } from '../store/games/actions';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
-const SortSelector = () => {
+const SortSelector = ({ filters }: any) => {
 
   const dispatch = useDispatch();
   const [sortOrder, setSortOrder] = useState<string>()
-
-  const filters = useSelector(getFiltersSelector)
 
   const sortOrders = [
     { value: "", label: "Relevance" },
@@ -20,6 +17,7 @@ const SortSelector = () => {
     { value: "-metacritic", label: "popularity" },
     { value: "-rating", label: "Average rating" }
   ]
+
 
   const onSelectOrder = (filterValue: string) => {
     setSortOrder(filterValue)
@@ -44,4 +42,11 @@ const SortSelector = () => {
   )
 }
 
-export default SortSelector
+const mapStateToProps = ({ gamesState }: any) => {
+  return {
+    filters: gamesState.filters
+  };
+};
+
+export default connect(mapStateToProps)(SortSelector);
+

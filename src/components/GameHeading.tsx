@@ -1,14 +1,22 @@
 import { Heading } from "@chakra-ui/react";
+import { connect } from "react-redux";
 
+const GameHeading = ({ genre, platform }: any) => {
 
-const GameHeading = () => {
-
-  const heading = `${platform?.name || ''} ${genre?.name || ''} games`
-  return (
-    <Heading as='h1' marginY={5} >
-      {heading}
-    </Heading>
-  )
+  if (platform || genre)
+    return (
+      <Heading as='h1' marginY={5} >
+        {`${platform || ''} ${genre || ''} games`}
+      </Heading>
+    )
 }
 
-export default GameHeading
+const mapStateToProps = ({ genresState, platformsState }: any) => {
+  return {
+    genre: genresState.selectedGenre,
+    platform: platformsState.selectedPlatform
+  };
+};
+
+export default connect(mapStateToProps)(GameHeading);
+

@@ -25,7 +25,7 @@ export default (state = initialState, action: PlatformsActions) => {
       return {
         ...state,
         pending: false,
-        platforms: action.platforms,
+        platforms: action.payload.platforms,
         error: null,
       };
     case FETCH_PLATFORMS_FAILURE:

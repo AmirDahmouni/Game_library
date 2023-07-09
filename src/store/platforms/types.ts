@@ -4,7 +4,7 @@ import {
   FETCH_PLATFORMS_FAILURE,
   SELECT_PLATFORM_FILTER
 } from "./actionTypes";
-import IPlatform from "../../entities/Platform";
+import { IPlatform } from "../../entities/Platform";
 
 export interface PlatformsState {
   pending: boolean;
@@ -14,7 +14,7 @@ export interface PlatformsState {
 }
 
 export interface FetchPlatformsSuccessPayload {
-  platforms: IPlatform[];
+  platforms: IPlatform[] | null;
 }
 
 export interface FetchPlatformsFailurePayload {
@@ -28,12 +28,12 @@ export interface FetchPlatformsRequest {
 
 export interface SelectPlatformFilter {
   type: typeof SELECT_PLATFORM_FILTER;
-  platform: string;
+  platform: String;
 }
 
 export type FetchPlatformsSuccess = {
   type: typeof FETCH_PLATFORMS_SUCCESS;
-  platforms: FetchPlatformsSuccessPayload;
+  payload: FetchPlatformsSuccessPayload;
 };
 
 export type FetchPlatformsFailure = {

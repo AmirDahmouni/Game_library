@@ -13,9 +13,9 @@ export const fetchPlatformsRequest = (): FetchPlatformsRequest => ({
   type: FETCH_PLATFORMS_REQUEST,
 });
 
-export const fetchPlatformsSuccess = (platforms: FetchPlatformsSuccessPayload): FetchPlatformsSuccess => ({
+export const fetchPlatformsSuccess = (payload: FetchPlatformsSuccessPayload): FetchPlatformsSuccess => ({
   type: FETCH_PLATFORMS_SUCCESS,
-  platforms,
+  payload,
 });
 
 export const fetchPlatformsFailure = (payload: FetchPlatformsFailurePayload): FetchPlatformsFailure => ({
@@ -23,7 +23,7 @@ export const fetchPlatformsFailure = (payload: FetchPlatformsFailurePayload): Fe
   payload,
 });
 
-export const selectPlatformFilter = (platform: string): SelectPlatformFilter => ({
+export const selectPlatformFilter = (platform: String): SelectPlatformFilter => ({
   type: SELECT_PLATFORM_FILTER,
   platform,
 })

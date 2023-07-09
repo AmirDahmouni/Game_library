@@ -1,19 +1,32 @@
+import { useEffect } from 'react';
 import IGenre from '../entities/Genre';
 import getCroppedImageUrl from '../services/image-url'
 import { ListItem, Image, HStack, List, Heading, Spinner, Button } from "@chakra-ui/react"
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch, connect } from "react-redux";
+import { fetchGenresRequest, selectGenreFilter } from '../store/genres/actions';
+import { updateGamesFilters } from "../store/games/actions";
+import { fetchGamesRequest } from '../store/games/actions';
 
-const GenreList = () => {
+const GenreList = ({ filters, genresList, selectedGenre }: any) => {
 
+  const dispatch = useDispatch()
+  useEffect(() => {
+    dispatch(fetchGenresRequest())
+  }, [])
 
-  if (error) return null
-  if (isLoading) return <Spinner />
+  const onSelectedGenre = (genre: IGenre) => {
+    dispatch(selectGenreFilter(genre.name))
+    dispatch(updateGamesFilters("genreId", genre.id))
+    dispatch(fetchGamesRequest(filters))
+  }
+
   return (
+    genresList &&
     <>
       <Heading fontSize='2xl' marginBottom={3}>Genres</Heading>
       <List>
-        {data.map((genre: IGenre) =>
-          <ListItem key={genre.id} paddingY="5px">
+        {genresList.map((genre: IGenre) =>
+          <ListItem key={genre.name} paddingY="5px">
             <HStack>
               <Image
                 objectFit="cover"
@@ -21,7 +34,7 @@ const GenreList = () => {
                 borderRadius={8}
                 src={getCroppedImageUrl(genre.image_background)}
               />
-              <Button whiteSpace='normal' textAlign='left' fontWeight={genre.id === selectedGenre?.id ? 'bold' : 'normal'} onClick={() => onSelectedGenre(genre)} fontSize="lg">
+              <Button whiteSpace='normal' textAlign='left' fontWeight={genre.name === selectedGenre ? 'bold' : 'normal'} onClick={() => onSelectedGenre(genre)} fontSize="lg">
                 {genre.name}
               </Button>
             </HStack>
@@ -33,4 +46,13 @@ const GenreList = () => {
   )
 }
 
-export default GenreList
+const mapStateToProps = ({ genresState, gamesState }: any) => {
+  return {
+    filters: gamesState.filters,
+    genresList: genresState.genres,
+    selectedGenre: genresState.selectedGenre
+  };
+};
+
+export default connect(mapStateToProps)(GenreList);
+

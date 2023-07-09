@@ -7,11 +7,11 @@ import {
   FetchGamesFailurePayload,
   UpdateGamesFilters
 } from "./types";
-import { FiltersPayload } from "./types";
 
-export const fetchGamesRequest = (filters: FiltersPayload): FetchGamesRequest => ({
+
+export const fetchGamesRequest = (payload: { key: string, value: string }[]): FetchGamesRequest => ({
   type: FETCH_GAMES_REQUEST,
-  filters,
+  payload
 });
 
 export const fetchGamesSuccess = (payload: FetchGamesSuccessPayload): FetchGamesSuccess => ({
@@ -24,7 +24,7 @@ export const fetchGamesFailure = (payload: FetchGamesFailurePayload): FetchGames
   payload,
 });
 
-export const updateGamesFilters = (filter: string, value: string): UpdateGamesFilters => ({
+export const updateGamesFilters = (filter: string, value: Number | string): UpdateGamesFilters => ({
   type: UPDATE_GAMES_FILTERS,
   filter,
   value

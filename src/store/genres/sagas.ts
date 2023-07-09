@@ -5,14 +5,14 @@ import { fetchGenresFailure, fetchGenresSuccess } from "./actions";
 import { FETCH_GENRES_REQUEST } from "./actionTypes";
 import IGenre from "../../entities/Genre";
 
-const getGenres = () => axios.get<IGenre[]>("https://api.rawg.io/api/genres");
+const getGenres = () => axios.get<IGenre[]>("https://api.rawg.io/api/genres?key=8206bb793cbb42d985daa5e03d001766");
 
 
 function* fetchGenresSaga() {
   try {
 
     const response: AxiosResponse<IGenre[]> = yield call(getGenres);
-    yield put(fetchGenresSuccess({ genres: response.data }));
+    yield put(fetchGenresSuccess(response.data.results));
   } catch (e) {
     const error = e as AxiosError;
     yield put(fetchGenresFailure({ error: error.message }));

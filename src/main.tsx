@@ -9,11 +9,13 @@ import router from './routes'
 
 ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
   <React.StrictMode>
-    <Provider store={store}>
-      <ChakraProvider theme={theme}>
-        <ColorModeScript initialColorMode={theme.config.initialColorMode} />
+
+    <ChakraProvider theme={theme}>
+      <ColorModeScript initialColorMode={theme.config.initialColorMode} />
+      <Provider store={store}>
         <RouterProvider router={router} />
-      </ChakraProvider>
-    </Provider>
+      </Provider>
+    </ChakraProvider>
+
   </React.StrictMode>,
 )

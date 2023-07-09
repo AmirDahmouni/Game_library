@@ -9,7 +9,7 @@ import IGame from "../../entities/Game";
 export interface GamesState {
   pending: boolean;
   games: IGame[];
-  filters: { string: number | string }[];
+  filters: { key: string, value: string | Number | null }[];
   error: string | null;
 }
 
@@ -24,13 +24,13 @@ export interface FetchGamesFailurePayload {
 
 export interface FetchGamesRequest {
   type: typeof FETCH_GAMES_REQUEST;
-  filters: FiltersPayload
+  payload: { key: string, value: string }[]
 }
 
 export interface UpdateGamesFilters {
   type: typeof UPDATE_GAMES_FILTERS;
   filter: string;
-  value: string;
+  value: Number | string;
 }
 
 export type FetchGamesSuccess = {
@@ -43,13 +43,6 @@ export type FetchGamesFailure = {
   payload: FetchGamesFailurePayload;
 };
 
-export type FiltersPayload = {
-  genreId: number,
-  platformId: number,
-  sortOrder: string,
-  searchText: string,
-  pageParam: number,
-}
 
 export type GamesActions =
   | FetchGamesRequest
