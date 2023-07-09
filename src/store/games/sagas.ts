@@ -2,9 +2,9 @@ import axios from "axios";
 import { all, call, put, takeLatest } from "redux-saga/effects";
 import { AxiosResponse, AxiosError } from 'axios'
 import { fetchGamesFailure, fetchGamesSuccess } from "./actions";
-import { FETCH_GAMES_REQUEST } from "./actionTypes";
+import { FETCH_GAMES_REQUEST, FETCH_GAME_REQUEST } from "./actionTypes";
 import IGame from "../../entities/Game";
-import { FetchGamesRequest } from "./types";
+import { FetchGamesRequest, FetchGameRequest } from "./types";
 
 type filters = {
   genreId: Number | null,
@@ -28,6 +28,15 @@ const getGames = (filters: filters) => axios.get<IGame[]>(
   }
 );
 
+const getGame = (slug: string) => axios.get<IGame>(
+  `https://api.rawg.io/api/games/${slug}`,
+  {
+    params: {
+      key: "8206bb793cbb42d985daa5e03d001766"
+    }
+  }
+)
+
 
 function* fetchGamesSaga(action: FetchGamesRequest) {
   console.log(action.payload);
@@ -44,8 +53,23 @@ function* fetchGamesSaga(action: FetchGamesRequest) {
   }
 }
 
+
+function* fetchGameSaga(action: FetchGameRequest) {
+  try {
+    const response: AxiosResponse<IGame> = yield call(getGame, action.payload.slug);
+    yield put(fetchGameSuccess({ game: response.data }));
+  } catch (e) {
+    const error = e as AxiosError;
+    yield put(fetchGameFailure({ error: error.message }));
+  }
+}
+
+function* gameSaga() {
+  yield all([takeLatest(FETCH_GAME_REQUEST, fetchGameSaga)]);
+}
+
 function* gamesSaga() {
   yield all([takeLatest(FETCH_GAMES_REQUEST, fetchGamesSaga)]);
 }
 
-export default gamesSaga;
+export { gamesSaga, gameSaga };

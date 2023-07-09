@@ -1,11 +1,19 @@
-import { FETCH_GAMES_REQUEST, FETCH_GAMES_FAILURE, FETCH_GAMES_SUCCESS, UPDATE_GAMES_FILTERS } from "./actionTypes";
+import {
+  FETCH_GAMES_REQUEST, FETCH_GAMES_FAILURE, FETCH_GAMES_SUCCESS, UPDATE_GAMES_FILTERS,
+  FETCH_GAME_REQUEST, FETCH_GAME_FAILURE, FETCH_GAME_SUCCESS,
+} from "./actionTypes";
 import {
   FetchGamesRequest,
   FetchGamesSuccess,
   FetchGamesSuccessPayload,
   FetchGamesFailure,
   FetchGamesFailurePayload,
-  UpdateGamesFilters
+  UpdateGamesFilters,
+  FetchGameRequest,
+  FetchGameSuccess,
+  FetchGameSuccessPayload,
+  FetchGameFailure,
+  FetchGameFailurePayload
 } from "./types";
 
 
@@ -21,6 +29,21 @@ export const fetchGamesSuccess = (payload: FetchGamesSuccessPayload): FetchGames
 
 export const fetchGamesFailure = (payload: FetchGamesFailurePayload): FetchGamesFailure => ({
   type: FETCH_GAMES_FAILURE,
+  payload,
+});
+
+export const fetchGameRequest = (payload: string): FetchGameRequest => ({
+  type: FETCH_GAME_REQUEST,
+  payload
+});
+
+export const fetchGameSuccess = (payload: FetchGameSuccessPayload): FetchGameSuccess => ({
+  type: FETCH_GAME_SUCCESS,
+  payload,
+});
+
+export const fetchGameFailure = (payload: FetchGameFailurePayload): FetchGameFailure => ({
+  type: FETCH_GAME_FAILURE,
   payload,
 });
 
