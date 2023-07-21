@@ -11,8 +11,8 @@ const getGenres = () => axios.get<IGenre[]>("https://api.rawg.io/api/genres?key=
 function* fetchGenresSaga() {
   try {
 
-    const response: AxiosResponse<IGenre[]> = yield call(getGenres);
-    yield put(fetchGenresSuccess(response.data.results));
+    const response: AxiosResponse<IGenre> = yield call(getGenres);
+    yield put(fetchGenresSuccess({ genres: response.data.results }));
   } catch (e) {
     const error = e as AxiosError;
     yield put(fetchGenresFailure({ error: error.message }));

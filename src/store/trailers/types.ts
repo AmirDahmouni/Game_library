@@ -11,6 +11,10 @@ export interface TrailerState {
   error: string | null;
 }
 
+export interface FetchTrailerRequestPayload {
+  gameId: string
+}
+
 export interface FetchTrailerSuccessPayload {
   trailer: ITrailer | null;
 }
@@ -22,6 +26,7 @@ export interface FetchTrailerFailurePayload {
 
 export interface FetchTrailerRequest {
   type: typeof FETCH_TRAILER_REQUEST;
+  payload: FetchTrailerRequestPayload
 }
 
 

@@ -17,16 +17,16 @@ import { fetchGameRequest } from '../store/games/actions';
 
 const GameDetailPage = ({ game }: any) => {
   const { slug } = useParams();
-
-
   const dispatch = useDispatch()
 
   useEffect(() => {
-    dispatch(fetchGameRequest(slug))
-  }, [])
+    if (slug)
+      dispatch(fetchGameRequest({ slug: slug }))
+  }, [slug])
 
 
   return (
+    game &&
     <SimpleGrid columns={{ base: 1, md: 2 }} spacing={5}>
       <GridItem>
         <Heading>{game.name}</Heading>

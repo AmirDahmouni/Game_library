@@ -18,9 +18,7 @@ function HomePage() {
         lg: '200px 1fr'
       }}
     >
-      <GridItem area="nav" >
-        <NavBar />
-      </GridItem>
+
       <Show above="lg">
         <GridItem area="aside" paddingX="20px" >
           <GenreList />

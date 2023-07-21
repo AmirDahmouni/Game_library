@@ -1,6 +1,6 @@
 import { ImageProps } from "@chakra-ui/react";
-import love from "../assets/love.png";
-import like from '../assets/like.png';
+import love from "../assets/love.webp";
+import like from "../assets/like.webp"
 import { Image } from '@chakra-ui/react'
 
 interface Props {

@@ -1,25 +1,28 @@
 import { useEffect } from 'react';
 import { useDispatch } from 'react-redux';
-
-interface Props {
-  gameId: number;
-}
+import { fetchTrailerRequest } from '../store/trailers/actions';
+import { connect } from 'react-redux';
 
 const GameTrailer = ({ gameId, game }: any) => {
 
   const dispatch = useDispatch()
   useEffect(() => {
-    dispatch()
-  }, [])
+    dispatch(fetchTrailerRequest({ gameId: gameId }))
+  }, [gameId])
 
-  const first = game?.results[0];
-  return first ? (
-    <video
-      src={first.data[480]}
-      poster={first.preview}
-      controls
-    />
-  ) : null;
+  useEffect(() => {
+    console.log(game);
+  }, [game])
+
+
+  return null;
 };
 
-export default GameTrailer;
+const mapStateToProps = ({ trailerState }: any) => {
+  return {
+    game: trailerState.trailer
+  };
+};
+
+export default connect(mapStateToProps)(GameTrailer);
+

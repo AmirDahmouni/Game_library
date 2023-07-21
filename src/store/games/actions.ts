@@ -1,6 +1,8 @@
 import {
   FETCH_GAMES_REQUEST, FETCH_GAMES_FAILURE, FETCH_GAMES_SUCCESS, UPDATE_GAMES_FILTERS,
   FETCH_GAME_REQUEST, FETCH_GAME_FAILURE, FETCH_GAME_SUCCESS,
+  FETCH_SCREEN_GAME_REQUEST,
+  FETCH_SCREEN_GAME_SUCESS
 } from "./actionTypes";
 import {
   FetchGamesRequest,
@@ -10,10 +12,14 @@ import {
   FetchGamesFailurePayload,
   UpdateGamesFilters,
   FetchGameRequest,
-  FetchGameSuccess,
   FetchGameSuccessPayload,
   FetchGameFailure,
-  FetchGameFailurePayload
+  FetchGameSuccess,
+  FetchGameFailurePayload,
+  FetchGameScreensRequest,
+  FetchGameScreensSucessPayload,
+  FetchScreenSuccess,
+  FetchGameRequestPayload
 } from "./types";
 
 
@@ -32,7 +38,7 @@ export const fetchGamesFailure = (payload: FetchGamesFailurePayload): FetchGames
   payload,
 });
 
-export const fetchGameRequest = (payload: string): FetchGameRequest => ({
+export const fetchGameRequest = (payload: FetchGameRequestPayload): FetchGameRequest => ({
   type: FETCH_GAME_REQUEST,
   payload
 });
@@ -51,4 +57,14 @@ export const updateGamesFilters = (filter: string, value: Number | string): Upda
   type: UPDATE_GAMES_FILTERS,
   filter,
   value
+})
+
+export const fetchScreenGame = (payload: { game: string }): FetchGameScreensRequest => ({
+  type: FETCH_SCREEN_GAME_REQUEST,
+  payload
+})
+
+export const fetchScreenGameSuccess = (payload: FetchGameScreensSucessPayload): FetchScreenSuccess => ({
+  type: FETCH_SCREEN_GAME_SUCESS,
+  payload
 })

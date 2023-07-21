@@ -2,9 +2,11 @@ import axios from "axios";
 import { all, call, put, takeLatest } from "redux-saga/effects";
 import { AxiosResponse, AxiosError } from 'axios'
 import { fetchGamesFailure, fetchGamesSuccess } from "./actions";
-import { FETCH_GAMES_REQUEST, FETCH_GAME_REQUEST } from "./actionTypes";
+import { fetchGameSuccess, fetchGameFailure, fetchScreenGameSuccess } from "./actions";
+import { FETCH_GAMES_REQUEST, FETCH_GAME_REQUEST, FETCH_SCREEN_GAME_REQUEST } from "./actionTypes";
 import IGame from "../../entities/Game";
-import { FetchGamesRequest, FetchGameRequest } from "./types";
+import { FetchGamesRequest, FetchGameRequest, FetchGameScreensRequest } from "./types";
+import IScreenshot from "../../entities/Screenshot"
 
 type filters = {
   genreId: Number | null,
@@ -36,10 +38,17 @@ const getGame = (slug: string) => axios.get<IGame>(
     }
   }
 )
+const getGameScreen = (gameId: string) => axios.get<any[]>(
+  `https://api.rawg.io/api/games/${gameId}/screenshots`,
+  {
+    params: {
+      key: "8206bb793cbb42d985daa5e03d001766"
+    }
+  }
+)
 
 
 function* fetchGamesSaga(action: FetchGamesRequest) {
-  console.log(action.payload);
   const filters = action.payload?.reduce((acc: any, { key, value }) => {
     acc[key] = value;
     return acc;
@@ -56,6 +65,7 @@ function* fetchGamesSaga(action: FetchGamesRequest) {
 
 function* fetchGameSaga(action: FetchGameRequest) {
   try {
+    console.log(action.payload.slug);
     const response: AxiosResponse<IGame> = yield call(getGame, action.payload.slug);
     yield put(fetchGameSuccess({ game: response.data }));
   } catch (e) {
@@ -64,6 +74,20 @@ function* fetchGameSaga(action: FetchGameRequest) {
   }
 }
 
+function* fetchScreenShots(action: FetchGameScreensRequest) {
+  try {
+    const response: AxiosResponse<IScreenshot[]> = yield call(getGameScreen, action.payload.game);
+    console.log(response);
+    yield put(fetchScreenGameSuccess({ screens: response.data }));
+  } catch (e) {
+    const error = e as AxiosError;
+    //yield put(fetchScreenFailure({ error: error.message }));
+  }
+}
+
+function* screenSaga() {
+  yield all([takeLatest(FETCH_SCREEN_GAME_REQUEST, fetchScreenShots)]);
+}
 function* gameSaga() {
   yield all([takeLatest(FETCH_GAME_REQUEST, fetchGameSaga)]);
 }
@@ -72,4 +96,4 @@ function* gamesSaga() {
   yield all([takeLatest(FETCH_GAMES_REQUEST, fetchGamesSaga)]);
 }
 
-export { gamesSaga, gameSaga };
+export { gamesSaga, gameSaga, screenSaga };
