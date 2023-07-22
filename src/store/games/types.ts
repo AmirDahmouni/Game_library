@@ -18,7 +18,7 @@ export interface GamesState {
   games: IGame[];
   selectedGame: IGame | null;
   screens: IScreenshot[] | null;
-  filters: { key: string, value: string | null }[];
+  filters: { key: string, value: string | number | null }[];
   error: string | null;
 }
 
@@ -127,5 +127,4 @@ export type GamesActions =
   | FetchGameScreensRequest
   | FetchGameScreensSuccess
   | FetchScreenGameFailure
-
   ;

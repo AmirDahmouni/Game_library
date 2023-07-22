@@ -65,7 +65,6 @@ function* fetchGamesSaga(action: FetchGamesRequest) {
 
 function* fetchGameSaga(action: FetchGameRequest) {
   try {
-    console.log(action.payload.slug);
     const response: AxiosResponse<IGame> = yield call(getGame, action.payload.slug);
     yield put(fetchGameSuccess({ game: response.data }));
   } catch (e) {
@@ -77,7 +76,6 @@ function* fetchGameSaga(action: FetchGameRequest) {
 function* fetchScreenShots(action: FetchGameScreensRequest) {
   try {
     const response: AxiosResponse<IScreenshot[]> = yield call(getGameScreen, action.payload.game);
-    console.log(response);
     yield put(fetchScreenGameSuccess({ screens: response.data }));
   } catch (e) {
     const error = e as AxiosError;

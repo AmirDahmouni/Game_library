@@ -5,66 +5,58 @@ import {
   FETCH_SCREEN_GAME_SUCESS
 } from "./actionTypes";
 import {
-  FetchGamesRequest,
-  FetchGamesSuccess,
   FetchGamesSuccessPayload,
-  FetchGamesFailure,
   FetchGamesFailurePayload,
-  UpdateGamesFilters,
-  FetchGameRequest,
   FetchGameSuccessPayload,
-  FetchGameFailure,
-  FetchGameSuccess,
   FetchGameFailurePayload,
-  FetchGameScreensRequest,
   FetchGameScreensSucessPayload,
-  FetchScreenSuccess,
-  FetchGameRequestPayload
+  FetchGameRequestPayload,
+  GamesActions
 } from "./types";
 
 
-export const fetchGamesRequest = (payload: { key: string, value: string }[]): FetchGamesRequest => ({
+export const fetchGamesRequest = (payload: { key: string, value: string }[]): GamesActions => ({
   type: FETCH_GAMES_REQUEST,
   payload
 });
 
-export const fetchGamesSuccess = (payload: FetchGamesSuccessPayload): FetchGamesSuccess => ({
+export const fetchGamesSuccess = (payload: FetchGamesSuccessPayload): GamesActions => ({
   type: FETCH_GAMES_SUCCESS,
   payload,
 });
 
-export const fetchGamesFailure = (payload: FetchGamesFailurePayload): FetchGamesFailure => ({
+export const fetchGamesFailure = (payload: FetchGamesFailurePayload): GamesActions => ({
   type: FETCH_GAMES_FAILURE,
   payload,
 });
 
-export const fetchGameRequest = (payload: FetchGameRequestPayload): FetchGameRequest => ({
+export const fetchGameRequest = (payload: FetchGameRequestPayload): GamesActions => ({
   type: FETCH_GAME_REQUEST,
   payload
 });
 
-export const fetchGameSuccess = (payload: FetchGameSuccessPayload): FetchGameSuccess => ({
+export const fetchGameSuccess = (payload: FetchGameSuccessPayload): GamesActions => ({
   type: FETCH_GAME_SUCCESS,
   payload,
 });
 
-export const fetchGameFailure = (payload: FetchGameFailurePayload): FetchGameFailure => ({
+export const fetchGameFailure = (payload: FetchGameFailurePayload): GamesActions => ({
   type: FETCH_GAME_FAILURE,
   payload,
 });
 
-export const updateGamesFilters = (filter: string, value: Number | string): UpdateGamesFilters => ({
+export const updateGamesFilters = (filter: string, value: Number | string): GamesActions => ({
   type: UPDATE_GAMES_FILTERS,
   filter,
   value
 })
 
-export const fetchScreenGame = (payload: { game: string }): FetchGameScreensRequest => ({
+export const fetchScreenGame = (payload: { game: string }): GamesActions => ({
   type: FETCH_SCREEN_GAME_REQUEST,
   payload
 })
 
-export const fetchScreenGameSuccess = (payload: FetchGameScreensSucessPayload): FetchScreenSuccess => ({
+export const fetchScreenGameSuccess = (payload: FetchGameScreensSucessPayload): GamesActions => ({
   type: FETCH_SCREEN_GAME_SUCESS,
   payload
 })

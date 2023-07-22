@@ -3,6 +3,7 @@ import ErrorPage from "./pages/ErrorPage";
 import HomePage from "./pages/HomePage";
 import GameDetailPage from "./pages/GameDetailPage";
 import Layout from "./pages/Layout";
+import LoginPage from "./pages/Login";
 
 const router = createBrowserRouter([
   {
@@ -13,7 +14,14 @@ const router = createBrowserRouter([
       { path: "/games", index: true, element: <HomePage /> },
       { path: '/games/:slug', element: <GameDetailPage /> }
     ]
-  }
+  },
+  {
+    path: '/login',
+    errorElement: <ErrorPage />,
+    children: [
+      { path: '/login', element: <LoginPage /> },
+    ]
+  },
 ]);
 
 export default router;

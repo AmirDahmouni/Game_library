@@ -22,7 +22,7 @@ const GameDetailPage = ({ game }: any) => {
   useEffect(() => {
     if (slug)
       dispatch(fetchGameRequest({ slug: slug }))
-  }, [slug])
+  }, [])
 
 
   return (

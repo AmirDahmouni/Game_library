@@ -5,7 +5,7 @@ import theme from "./theme"
 import { RouterProvider } from 'react-router-dom'
 import { Provider } from "react-redux";
 import store from './store'
-import router from './routes'
+import App from './App'
 
 ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
   <React.StrictMode>
@@ -13,7 +13,7 @@ ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
     <ChakraProvider theme={theme}>
       <ColorModeScript initialColorMode={theme.config.initialColorMode} />
       <Provider store={store}>
-        <RouterProvider router={router} />
+        <App />
       </Provider>
     </ChakraProvider>
 

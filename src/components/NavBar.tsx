@@ -1,5 +1,5 @@
 import { HStack, Image } from "@chakra-ui/react"
-import logo from "../assets/react.svg";
+import logo from "../assets/logo.webp";
 import ColorModeSwitch from "./ColorModeSwitch";
 import SearchInput from "./SearchInput";
 import { fetchGamesRequest, updateGamesFilters } from "../store/games/actions";
@@ -17,7 +17,7 @@ const NavBar = ({ filters }: any) => {
 
   return (
     <HStack justifyContent="space-between" padding="10px">
-      <Image src={logo} />
+      <Image src={logo} width={50} height={50} />
       <SearchInput onSearch={(filter) => search(filter)} />
       <ColorModeSwitch />
     </HStack>

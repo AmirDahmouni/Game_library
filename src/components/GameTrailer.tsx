@@ -10,11 +10,6 @@ const GameTrailer = ({ gameId, game }: any) => {
     dispatch(fetchTrailerRequest({ gameId: gameId }))
   }, [gameId])
 
-  useEffect(() => {
-    console.log(game);
-  }, [game])
-
-
   return null;
 };
 

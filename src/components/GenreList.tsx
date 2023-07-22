@@ -10,6 +10,7 @@ import { fetchGamesRequest } from '../store/games/actions';
 const GenreList = ({ filters, genresList, selectedGenre }: any) => {
 
   const dispatch = useDispatch()
+
   useEffect(() => {
     dispatch(fetchGenresRequest())
   }, [])
@@ -20,29 +21,32 @@ const GenreList = ({ filters, genresList, selectedGenre }: any) => {
     dispatch(fetchGamesRequest(filters))
   }
 
+
+
   return (
-    genresList &&
-    <>
-      <Heading fontSize='2xl' marginBottom={3}>Genres</Heading>
-      <List>
-        {genresList.map((genre: IGenre) =>
-          <ListItem key={genre.name} paddingY="5px">
-            <HStack>
-              <Image
-                objectFit="cover"
-                boxSize="32px"
-                borderRadius={8}
-                src={getCroppedImageUrl(genre.image_background)}
-              />
-              <Button whiteSpace='normal' textAlign='left' fontWeight={genre.name === selectedGenre ? 'bold' : 'normal'} onClick={() => onSelectedGenre(genre)} fontSize="lg">
-                {genre.name}
-              </Button>
-            </HStack>
-          </ListItem>
-        )
-        }
-      </List >
-    </>
+    genresList.length != 0 ?
+      <>
+        <Heading fontSize='2xl' marginBottom={3}>Genres</Heading>
+        <List>
+          {genresList.genres.map((genre: IGenre) =>
+            <ListItem key={genre.name} paddingY="5px">
+              <HStack>
+                <Image
+                  objectFit="cover"
+                  boxSize="32px"
+                  borderRadius={8}
+                  src={getCroppedImageUrl(genre.image_background)}
+                />
+                <Button whiteSpace='normal' textAlign='left' fontWeight={genre.name === selectedGenre ? 'bold' : 'normal'}
+                  onClick={() => onSelectedGenre(genre)} fontSize="lg">
+                  {genre.name}
+                </Button>
+              </HStack>
+            </ListItem>
+          )
+          }
+        </List >
+      </> : null
   )
 }
 

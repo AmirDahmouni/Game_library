@@ -20,7 +20,8 @@ const initialState: GamesState = {
     { key: "platfotmId", value: null },
     { key: "sortOrder", value: null },
     { key: "searchText", value: null },
-    { key: "pageParam", value: null }
+    { key: "pageParam", value: null },
+    { key: "pageParam", value: 1 },
   ],
   selectedGame: null,
   screens: null,
@@ -73,6 +74,7 @@ export default (state = initialState, action: GamesActions) => {
       {
         let updatedFilters = state.filters
         const indexFilter = updatedFilters?.findIndex(filter => filter.key === action.filter)
+
         if (indexFilter != -1)
           updatedFilters.splice(indexFilter, 1)
         updatedFilters.push({
