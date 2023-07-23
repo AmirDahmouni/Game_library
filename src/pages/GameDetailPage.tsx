@@ -27,7 +27,7 @@ const GameDetailPage = ({ game }: any) => {
 
   return (
     game &&
-    <SimpleGrid columns={{ base: 1, md: 2 }} spacing={5}>
+    <SimpleGrid columns={{ base: 1, md: 2 }} spacing={5} padding={50}>
       <GridItem>
         <Heading>{game.name}</Heading>
         <ExpandableText>{game.description_raw}</ExpandableText>

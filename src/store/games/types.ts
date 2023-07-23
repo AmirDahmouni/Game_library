@@ -20,10 +20,12 @@ export interface GamesState {
   screens: IScreenshot[] | null;
   filters: { key: string, value: string | number | null }[];
   error: string | null;
+  nbPages: number | null;
 }
 
 export interface FetchGamesSuccessPayload {
   games: IGame[];
+  nbPages: number
 }
 export interface FetchGameSuccessPayload {
   game: IGame;

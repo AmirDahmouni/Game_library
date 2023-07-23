@@ -26,6 +26,7 @@ const initialState: GamesState = {
   selectedGame: null,
   screens: null,
   error: null,
+  nbPages: null
 };
 
 export default (state = initialState, action: GamesActions) => {
@@ -40,13 +41,14 @@ export default (state = initialState, action: GamesActions) => {
       return {
         ...state,
         pending: true,
-        filters: action.payload
+        slug: action.payload.slug,
       };
     case FETCH_GAMES_SUCCESS:
       return {
         ...state,
         pending: false,
         games: action.payload.games,
+        nbPages: action.payload.nbPages,
         error: null,
       };
     case FETCH_GAME_SUCCESS:

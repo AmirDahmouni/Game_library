@@ -1,12 +1,4 @@
-import { Grid, GridItem, HStack, Show, Box, Flex, Spacer } from '@chakra-ui/react'
-import {
-  Previous,
-  Paginator,
-  PageGroup,
-  Page,
-  Next
-} from 'chakra-paginator';
-import { CgChevronLeft, CgChevronRight } from 'react-icons/cg'
+import { Grid, GridItem, HStack, Show, Box, IconButton, Button } from '@chakra-ui/react'
 import GameGrid from "../components/GameGrid"
 import GenreList from "../components/GenreList"
 import PlatformSelector from '../components/PlatformSelector'
@@ -15,10 +7,12 @@ import SortSelector from '../components/SortSelector'
 import { useCallback, useState } from 'react';
 import { useDispatch, connect } from 'react-redux';
 import { updateGamesFilters, fetchGamesRequest } from '../store/games/actions';
+import { ArrowLeftIcon, ArrowRightIcon } from "@chakra-ui/icons"
 
-function HomePage({ filters }: any) {
+function HomePage({ filters, nbPages }: any) {
 
-  const [pages, setPages] = useState([1, 2, 3])
+  const [pages, setPages] = useState<number[]>([1, 2, 3])
+  const [currentPage, setCurrentPage] = useState<number>(1)
 
   const normalStyles = {
     bg: 'white.100'
@@ -28,14 +22,18 @@ function HomePage({ filters }: any) {
     bg: 'blue.300'
   };
 
-  const pagesQuantity = 50
-
   const dispatch = useDispatch()
 
   const handlePageChange = useCallback((page: number) => {
     dispatch(updateGamesFilters("pageParam", page))
     dispatch(fetchGamesRequest(filters))
-    setPages([page - 1, page, page + 1])
+    setCurrentPage(page)
+    let pages = [1, 2, 3]
+    if (page == nbPages)
+      pages = [nbPages - 2, nbPages - 1, nbPages]
+    if (page !== 1)
+      pages = [page - 1, page, page + 1]
+    setPages(pages)
   }, [])
 
   return (
@@ -63,26 +61,22 @@ function HomePage({ filters }: any) {
           </HStack>
         </Box>
         <GameGrid />
-        <Paginator
-          onPageChange={handlePageChange}
-          pagesQuantity={pagesQuantity - 1}>
-          <Previous bg="white">
-            <CgChevronLeft />
-          </Previous>
-          <PageGroup>
-            {[1, 2, 3].map((page) =>
-              <Page
-                key={`paginator_page_${page}`}
-                page={page}
-                normalStyles={normalStyles}
-                activeStyles={activeStyles}
-              />
-            )}
-          </PageGroup>
-          <Next bg="white">
-            <CgChevronRight />
-          </Next>
-        </Paginator>
+        <Box marginLeft={500}>
+          <IconButton aria-label='Search database' icon={<ArrowLeftIcon />} onClick={() => handlePageChange(1)} />
+          {
+            pages.map((index) =>
+              <Button
+                bg={currentPage == index ? 'blue.700' : 'whiteAlpha.100'}
+                marginLeft={2}
+                key={index}
+                onClick={() => handlePageChange(index)}
+              >
+                {index}
+              </Button>
+            )
+          }
+          <IconButton marginLeft={2} aria-label='Search database' icon={<ArrowRightIcon />} onClick={() => handlePageChange(nbPages)} />
+        </Box>
       </GridItem>
 
     </Grid >
@@ -91,7 +85,8 @@ function HomePage({ filters }: any) {
 
 const mapStateToProps = ({ gamesState }: any) => {
   return {
-    filters: gamesState.filters
+    filters: gamesState.filters,
+    nbPages: gamesState.nbPages
   };
 };
 
