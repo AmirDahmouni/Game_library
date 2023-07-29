@@ -10,7 +10,7 @@ function LoginPage(props: any) {
   const [password, setPassword] = useState("")
 
   const onSubmit = () => {
-    if (email == "amir.dahmouni@gmail.com" && password == "123") {
+    if (email == "Amir" && password == "root") {
       props.signin()
       localStorage.setItem("connexion", "true")
       navigate("/games")

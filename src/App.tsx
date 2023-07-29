@@ -37,7 +37,14 @@ export default function App() {
           path="/login"
           element={<LoginPage signin={signin} />}
         />
-        <Route path="*" element={<ErrorPage />} />
+        <Route path="/" element={<Protected isSignedIn={isSignedIn}>
+          <Layout />
+          <HomePage />
+        </Protected>} />
+        <Route
+          path="*"
+          element={<ErrorPage />}
+        />
       </Routes>
     </BrowserRouter>
   )
