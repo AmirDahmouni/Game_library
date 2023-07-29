@@ -2,7 +2,7 @@ import {
   GridItem,
   Heading,
   SimpleGrid,
-  Spinner
+  Box
 } from '@chakra-ui/react';
 import { useParams } from 'react-router-dom';
 import ExpandableText from '../components/ExpandableText';
@@ -15,7 +15,8 @@ import { useDispatch } from 'react-redux';
 import { fetchGameRequest } from '../store/games/actions';
 
 
-const GameDetailPage = ({ game }: any) => {
+
+const GameDetailPage = ({ game, error }: any) => {
   const { slug } = useParams();
   const dispatch = useDispatch()
 
@@ -23,6 +24,33 @@ const GameDetailPage = ({ game }: any) => {
     if (slug)
       dispatch(fetchGameRequest({ slug: slug }))
   }, [])
+
+  if (error)
+    return (
+      <Box
+        display="flex"
+        justifyContent="center"
+        alignItems="center"
+        height="100vh"
+      >
+        <Box
+          borderWidth="1px"
+          borderRadius="lg"
+          p="8"
+          maxWidth="500px"
+          width="100%"
+          boxShadow="lg"
+        >
+          <Heading textAlign="center" mb="6" color={"red.600"}>
+            Oops !
+          </Heading>
+
+          <Heading textAlign={"center"} >
+            This game does not exist.
+          </Heading>
+
+        </Box>
+      </Box>)
 
 
   return (
@@ -43,7 +71,8 @@ const GameDetailPage = ({ game }: any) => {
 
 const mapStateToProps = ({ gamesState }: any) => {
   return {
-    game: gamesState.selectedGame
+    game: gamesState.selectedGame,
+    error: gamesState.error
   };
 };
 

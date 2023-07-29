@@ -42,6 +42,10 @@ export default function App() {
           <HomePage />
         </Protected>} />
         <Route
+          path="/error"
+          element={<ErrorPage />}
+        />
+        <Route
           path="*"
           element={<ErrorPage />}
         />
