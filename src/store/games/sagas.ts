@@ -16,11 +16,14 @@ type filters = {
   pageParam: Number | null,
 }
 
+console.log(import.meta.env.VITE_URL_API);
+
 const getGames = (filters: filters) => axios.get<IGame[]>(
-  "https://api.rawg.io/api/games",
+  `${import.meta.env.VITE_URL_API}/games`
+  ,
   {
     params: {
-      key: "8206bb793cbb42d985daa5e03d001766",
+      key: import.meta.env.VITE_KEY_API,
       genres: filters?.genreId,
       platforms: filters?.platformId,
       ordering: filters?.sortOrder,
@@ -31,18 +34,18 @@ const getGames = (filters: filters) => axios.get<IGame[]>(
 );
 
 const getGame = (slug: string) => axios.get<IGame>(
-  `https://api.rawg.io/api/games/${slug}`,
+  `${import.meta.env.VITE_URL_API}/games/${slug}`,
   {
     params: {
-      key: "8206bb793cbb42d985daa5e03d001766"
+      key: import.meta.env.VITE_KEY_API
     }
   }
 )
 const getGameScreen = (gameId: string) => axios.get<any[]>(
-  `https://api.rawg.io/api/games/${gameId}/screenshots`,
+  `${import.meta.env.VITE_URL_API}/games/${gameId}/screenshots`,
   {
     params: {
-      key: "8206bb793cbb42d985daa5e03d001766"
+      key: import.meta.env.VITE_KEY_API
     }
   }
 )

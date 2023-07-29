@@ -5,7 +5,7 @@ import { fetchGenresFailure, fetchGenresSuccess } from "./actions";
 import { FETCH_GENRES_REQUEST } from "./actionTypes";
 import IGenre from "../../entities/Genre";
 
-const getGenres = () => axios.get<IGenre[]>("https://api.rawg.io/api/genres?key=8206bb793cbb42d985daa5e03d001766");
+const getGenres = () => axios.get<IGenre[]>(`${import.meta.env.VITE_URL_API}/genres?key=${import.meta.env.VITE_KEY_API}`);
 
 
 function* fetchGenresSaga() {

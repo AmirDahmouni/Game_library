@@ -5,9 +5,9 @@ import { fetchPlatformsFailure, fetchPlatformsSuccess } from "./actions";
 import { FETCH_PLATFORMS_REQUEST } from "./actionTypes";
 import { IPlatformResponse } from "../../entities/Platform";
 
-const getPlatforms = () => axios.get<IPlatformResponse[]>("https://api.rawg.io/api/platforms/lists/parents", {
+const getPlatforms = () => axios.get<IPlatformResponse[]>(`${import.meta.env.VITE_URL_API}/platforms/lists/parents`, {
   params: {
-    key: "8206bb793cbb42d985daa5e03d001766"
+    key: import.meta.env.VITE_KEY_API
   }
 });
 

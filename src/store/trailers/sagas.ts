@@ -6,9 +6,9 @@ import { FETCH_TRAILER_REQUEST } from "./actionTypes";
 import { ITrailerResponse } from "../../entities/Trailer";
 import { FetchTrailerRequest } from "./types";
 
-const getTrailers = (gameId: string) => axios.get<ITrailerResponse[]>(`https://api.rawg.io/api/games/${gameId}/movies`, {
+const getTrailers = (gameId: string) => axios.get<ITrailerResponse[]>(`${import.meta.env.VITE_URL_API}/games/${gameId}/movies`, {
   params: {
-    key: "8206bb793cbb42d985daa5e03d001766"
+    key: import.meta.env.VITE_KEY_API
   }
 });
 
