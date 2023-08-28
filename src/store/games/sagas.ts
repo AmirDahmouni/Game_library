@@ -57,7 +57,7 @@ function* fetchGamesSaga(action: FetchGamesRequest) {
     return acc;
   }, {});
   try {
-    const response: AxiosResponse<IGame[]> = yield call(getGames, filters);
+    const response: AxiosResponse<any> = yield call(getGames, filters);
     yield put(fetchGamesSuccess({ games: response.data, nbPages: Math.ceil(response.data.count / 20) }));
   } catch (e) {
     const error = e as AxiosError;

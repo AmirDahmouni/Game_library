@@ -37,7 +37,7 @@ function LoginPage(props: any) {
         <Heading textAlign="center" mb="6">
           Login
         </Heading>
-        <Box textAlign="-webkit-center">
+        <Box style={{ textAlignLast: "center" }}>
           <Image src={logo} width={60} height={60} />
         </Box>
 

@@ -9,12 +9,14 @@ const GameHeading = ({ genre, platform }: any) => {
         {`${platform || ''} ${genre || ''} games`}
       </Heading>
     )
+  else
+    return null
 }
 
 const mapStateToProps = ({ genresState, platformsState }: any) => {
   return {
-    genre: genresState.selectedGenre,
-    platform: platformsState.selectedPlatform
+    genre: genresState.selectedGenre || null,
+    platform: platformsState.selectedPlatform || null
   };
 };
 
