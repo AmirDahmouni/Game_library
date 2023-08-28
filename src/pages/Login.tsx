@@ -15,7 +15,6 @@ function LoginPage(props: any) {
       localStorage.setItem("connexion", "true")
       navigate("/games")
     }
-
   }
 
 
@@ -38,7 +37,7 @@ function LoginPage(props: any) {
           Login
         </Heading>
         <Box style={{ textAlignLast: "center" }}>
-          <Image src={logo} width={60} height={60} />
+          <Image src={logo} width={60} height={60} style={{ margin: "auto" }} />
         </Box>
 
         <FormControl id="email" mb="4">
