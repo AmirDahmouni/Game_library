@@ -14,13 +14,6 @@ function HomePage({ filters, nbPages }: any) {
   const [pages, setPages] = useState<number[]>([1, 2, 3])
   const [currentPage, setCurrentPage] = useState<number>(1)
 
-  const normalStyles = {
-    bg: 'white.100'
-  };
-
-  const activeStyles = {
-    bg: 'blue.300'
-  };
 
   const dispatch = useDispatch()
 
@@ -31,7 +24,7 @@ function HomePage({ filters, nbPages }: any) {
     let pages = [1, 2, 3]
     if (page == nbPages)
       pages = [nbPages - 2, nbPages - 1, nbPages]
-    if (page !== 1)
+    else if (page !== 1)
       pages = [page - 1, page, page + 1]
     setPages(pages)
   }, [])
@@ -86,7 +79,7 @@ function HomePage({ filters, nbPages }: any) {
 const mapStateToProps = ({ gamesState }: any) => {
   return {
     filters: gamesState.filters,
-    nbPages: gamesState.nbPages
+    nbPages: 500
   };
 };
 
