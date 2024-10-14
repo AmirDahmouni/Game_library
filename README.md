@@ -16,5 +16,6 @@ The **[Game Library](https://game-library-roan.vercel.app/)** was designed using
 - **Redux-Sagas**: Implemented to efficiently manage data flow and handle asynchronous operations, ensuring smooth state management throughout the app.
 
 ---
-
 Start browsing your favorite games today at **[Game Library](https://game-library-roan.vercel.app/)** with powerful filtering and sorting options!
+
+🔐 **Security Note**: To access the demo, please reach out to me for credentials.
