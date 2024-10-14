@@ -1,6 +1,6 @@
-# 🎮 Game Library   game-library-roan.vercel.app
+# 🎮 Game Library
 
-The **Game Library** was designed using **Chakra UI** for intuitive and responsive user interface components. It allows users to browse and display games fetched from the **RAWG API**.
+The **[Game Library](https://game-library-roan.vercel.app/)** was designed using **Chakra UI** for intuitive and responsive user interface components. It allows users to browse and display games fetched from the **RAWG API**.
 
 ### 🔍 Features
 
@@ -17,4 +17,4 @@ The **Game Library** was designed using **Chakra UI** for intuitive and responsi
 
 ---
 
-Start browsing your favorite games today with our powerful filtering and sorting options!
+Start browsing your favorite games today at **[Game Library](https://game-library-roan.vercel.app/)** with powerful filtering and sorting options!
